@@ -1,0 +1,70 @@
+
+/**
+ * Write a description of class cinematicket here.
+ *
+ * @author (your name)
+ * @version (a version number or a date)
+ */
+import java.util.Scanner;
+
+public class CinemaTicket {
+    public static void main(String[] args) {
+        Scanner sc = new Scanner(System.in);
+
+        // Input: Age group
+        System.out.println("Enter your age group (child/adult/senior): ");
+        String ageGroup = sc.nextLine().toLowerCase();
+
+        // Input: Movie language
+        System.out.println("Enter movie language (nepali/hindi/english): ");
+        String language = sc.nextLine().toLowerCase();
+
+        // Input: Student status
+        System.out.println("Are you a student? (yes/no): ");
+        String studentInput = sc.nextLine().toLowerCase();
+        boolean isStudent = studentInput.equals("yes");
+
+        // Input: Festival day
+        System.out.println("Is it a festival day? (yes/no): ");
+        String festivalInput = sc.nextLine().toLowerCase();
+        boolean isFestival = festivalInput.equals("yes");
+
+        // Step 1: Base price by age group
+        double price = 0;
+        if (ageGroup.equals("child")) {
+            price = 150;
+        } else if (ageGroup.equals("adult")) {
+            price = 250;
+        } else if (ageGroup.equals("senior")) {
+            price = 200;
+        } else {
+            System.out.println("Invalid age group entered!");
+            return;
+        }
+
+        // Step 2: Surcharge by movie language
+        if (language.equals("hindi")) {
+            price += 50;
+        } else if (language.equals("english")) {
+            price += 100;
+        } else if (!language.equals("nepali")) {
+            System.out.println("Invalid movie language entered!");
+            return;
+        }
+
+        // Step 3: Apply student discount (20%)
+        if (isStudent) {
+            price = price - (price * 0.20);
+        }
+
+        // Step 4: Apply festival discount (15%)
+        if (isFestival) {
+            price = price - (price * 0.15);
+        }
+
+        // Final output
+        System.out.println("Final Ticket Price: Rs. " + price);
+
+        sc.close();
+    }
+}
